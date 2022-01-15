@@ -16,11 +16,11 @@ services:
     ports:
         - "7000:80"
     links:
-        - db:db
+        - mysql:db
 
   wordpress:
     depends_on:
-      - db
+      - mysql
     image: wordpress:latest
     ports:
       - "8000:80"
@@ -28,7 +28,7 @@ services:
       - ./wordpress:/var/www/html/
     restart: always
     environment:
-      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_HOST: mysql:3306
       WORDPRESS_DB_USER: user
       WORDPRESS_DB_PASSWORD: password
       WORDPRESS_DB_NAME: wordpress
